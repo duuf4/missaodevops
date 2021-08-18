@@ -13,6 +13,8 @@ before_script:
   - whoami
   - pwd
 
+teste site:
+
 build site:
   stage: build
   artifacts:
