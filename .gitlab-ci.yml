@@ -5,7 +5,6 @@ stages:
   - package
   - deploy
 
-
 before_script:
   - whoami
   - pwd
@@ -39,14 +38,11 @@ package site:
     - npm install	
     - npm run build 
 
-
 deploy to website:
   stage: deploy
   cache:
     key: site-package
       policy: pull
-      paths:
-        - ./website/build
   before_script:
     - npm install -g surge
   script: 
@@ -58,4 +54,3 @@ deploy to website:
     url: http://missaodevops-rc.surge.sh
   only:
    - develop
-  
