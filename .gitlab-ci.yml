@@ -1,7 +1,7 @@
 image: node
 
-stage:
-  - teste
+stages:
+  - test
   - package
   - deploy
 
@@ -16,7 +16,7 @@ before_script:
 teste site:
   stage: test
   before_script:
-    - npm install -g broken-link-checker wait-on
+    - npm install -g broken-link-checker@^0.7.8 wait-on@^2.1.0
   script:
     - cd website
     - npm install && npm run start &
@@ -31,7 +31,6 @@ package site:
    expire_in: 2h20min
    paths:
      - ./website/build/missaodevops
-
 
   script:
     - cd website
