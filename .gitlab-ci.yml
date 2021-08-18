@@ -22,7 +22,7 @@ teste site:
 vulnerabilities check:
   stage: test
   script:
-    - 
+    -
 
 package site:
   stage: package
