@@ -1,6 +1,6 @@
 image: node
 
-stages:
+stage:
   - teste
   - package
   - deploy
