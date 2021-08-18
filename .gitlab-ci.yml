@@ -42,7 +42,7 @@ deploy to website:
   stage: deploy
   cache:
     key: site-package
-      policy: pull
+    policy: pull
   before_script:
     - npm install -g surge
   script: 
