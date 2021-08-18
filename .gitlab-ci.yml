@@ -28,7 +28,7 @@ build site:
     - npm install	
     - npm run build 
 
-deploy website:
+deploy to stagin:
   stage: deploy
   before_script:
     - npm install -g surge
@@ -40,4 +40,6 @@ deploy website:
   environment:
     name: staging
     url: http://missaodevops-rc.surge.sh
+  only:
+   - develop
   

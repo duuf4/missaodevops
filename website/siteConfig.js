@@ -71,7 +71,9 @@ const siteConfig = {
     */
 
     // This copyright info is used in /core/Footer.js and blog RSS/Atom feeds.
-    copyright: `Copyright © ${new Date().getFullYear()} Missaodevops`,
+    copyright: 'Copyright © ' +
+        new Date().getFullYear() +
+        'Missao Devops - v1.1',
 
     highlight: {
         // Highlight.js theme to use for syntax highlighting in code blocks.
