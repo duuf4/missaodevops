@@ -29,6 +29,7 @@ package site:
   cache:
     key: site-package
     policy: push
+
     paths:
       - ./website/build
   artifacts:
