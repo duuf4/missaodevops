@@ -44,19 +44,41 @@ package site:
     - npm install	
     - npm run build 
 
-deploy to website:
+deploy to staging:
   stage: deploy
+  variables:
+    - CNAME: staging-missaodevops.surge.sh
   cache:
     key: site-package
     policy: pull
   before_script:
     - npm install -g surge
   script: 
-    - surge --project ./website/build/missaodevops --domain missaodevops
+    - surge --project ./website/build/missaodevops --domain ${CNAME}
   after_script:
     - whoami
   environment:
     name: staging
-    url: http://missaodevops-rc.surge.sh
+    url: http://${CNAME}
   only:
    - develop
+
+deploy to production:
+  stage: deploy
+  variables:
+    - CNAME: missaodevops.surge.sh
+    - GIT_STRATEGY: none
+  cache:
+    key: site-package
+    policy: pull
+  before_script:
+    - npm install -g surge
+  script:
+    - surge --project ./website/build/missaodevops --domain ${CNAME}
+  after_script:
+    - whoami
+  environment:
+    name: staging
+    url: http://${CNAME}
+  only:
+   - master
