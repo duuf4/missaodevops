@@ -53,7 +53,7 @@ deploy to develop:
     key: site-package
     policy: pull
   before_script:
-    - npm install -g surge
+    - npm install -g surge@^0.20.1
   script: 
     - surge --project ./website/build/missaodevops --domain ${CNAME}
   after_script:
@@ -63,6 +63,43 @@ deploy to develop:
     url: http://${CNAME}
   only:
    - develop
+
+deploy to release:
+  stage: deploy
+  variables:
+    CNAME: $CI_COMMIT_REF_SLUG.missaodevops.surge.sh
+    GIT_STRATEGY: none
+  cache:
+    key: site-package
+    policy: pull
+  before_script:
+    - npm install -g surge@^0.20.1
+  script:
+    - surge --project ./website/build/missaodevops --domain ${CNAME}
+  after_script:
+    - whoami
+  environment:
+    name: review/$CI_COMMIT_REF_SLUG
+    url: http://${CNAME}
+  only:
+   - /^release-.*$/
+  on_stop: turnoff
+
+turnoff:
+  stage: deploy
+  variables:
+    CNAME: $CI_COMMIT_REF_SLUG.missaodevops.surge.sh
+    GIT_STRATEGY: none
+  before_script:
+    - npm install -g surge@^0.20.1
+  script:
+    - surge ???
+  environment:
+    name: review/$CI_COMMIT_REF_SLUG
+    url: http://${CNAME}
+    action: stop
+  only:
+   - /^release-.*$/
 
 
 
@@ -76,7 +113,7 @@ deploy to production:
     key: site-package
     policy: pull
   before_script:
-    - npm install -g surge
+    - npm install -g surge@^0.20.1
   script:
     - surge --project ./website/build/missaodevops --domain ${CNAME}
   after_script:
