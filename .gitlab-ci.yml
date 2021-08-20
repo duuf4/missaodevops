@@ -76,14 +76,12 @@ deploy to release:
     - npm install -g surge@^0.20.1
   script:
     - surge --project ./website/build/missaodevops --domain ${CNAME}
-  after_script:
-    - whoami
   environment:
     name: review/$CI_COMMIT_REF_SLUG
     url: http://${CNAME}
   only:
    - /^release-.*$/
-  on_stop: turnoff
+
 
 turnoff:
   stage: deploy
@@ -93,14 +91,11 @@ turnoff:
   before_script:
     - npm install -g surge@^0.20.1
   script:
-    - surge teardown
+    - surge teardown ${CNAME}
   when: manual
   environment:
     name: review/$CI_COMMIT_REF_SLUG
-    url: http://${CNAME}
     action: stop
-  only:
-   - /^release-.*$/
 
 
 
