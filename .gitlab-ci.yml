@@ -93,14 +93,14 @@ turnoff:
   before_script:
     - npm install -g surge@^0.20.1
   script:
-    - surge ???
+    - surge teardown
+  when: manual
   environment:
     name: review/$CI_COMMIT_REF_SLUG
     url: http://${CNAME}
     action: stop
   only:
    - /^release-.*$/
-
 
 
 
