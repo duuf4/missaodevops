@@ -95,8 +95,10 @@ turnoff:
   when: manual
   environment:
     name: review/$CI_COMMIT_REF_SLUG
+    url: http://${CNAME}
     action: stop
-
+  only:
+    - /^release-.*$/
 
 
 deploy to production:
