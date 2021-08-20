@@ -44,10 +44,11 @@ package site:
     - npm install	
     - npm run build 
 
-deploy to staging:
+deploy to develop:
   stage: deploy
   variables:
-    - CNAME: staging-missaodevops.surge.sh
+    CNAME: develop.missaodevops.surge.sh
+    GIT_STRATEGY: none
   cache:
     key: site-package
     policy: pull
@@ -58,16 +59,19 @@ deploy to staging:
   after_script:
     - whoami
   environment:
-    name: staging
+    name: develop
     url: http://${CNAME}
   only:
    - develop
 
+
+
+
 deploy to production:
   stage: deploy
   variables:
-    - CNAME: missaodevops.surge.sh
-    - GIT_STRATEGY: none
+    CNAME: missaodevops.surge.sh
+    GIT_STRATEGY: none
   cache:
     key: site-package
     policy: pull
@@ -78,7 +82,7 @@ deploy to production:
   after_script:
     - whoami
   environment:
-    name: staging
+    name: production
     url: http://${CNAME}
   only:
    - master
